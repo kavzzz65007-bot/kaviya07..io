@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AcadID – One Identity. Trusted Academics.</title>
+  <meta name="description" content="AcadID is an independent prototype for academic record validation, correction assistance and consent-based verification. Demo data only.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314243A'/%3E%3Cpath d='M16 6l8 3v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V9z' fill='none' stroke='%232BB8C6' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M12.5 15.5l2.5 2.5 4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>
+    /* Apply the saved theme before first paint to avoid a flash of the wrong theme. */
+    (function () {
+      var theme = 'light';
+      try {
+        theme = localStorage.getItem('acadid.theme');
+        if (!theme) { theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+      } catch (e) { theme = 'light'; }
+      document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <!-- Optional QR library (CDN). If it cannot load, the app shows the link instead of a QR image. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <button type="button" class="skip-link" data-action="skip">Skip to main content</button>
+
+  <!-- ====================== PUBLIC LANDING PAGE ====================== -->
+  <div id="landing">
+    <header class="lp-header">
+      <div class="container lp-header-in">
+        <a class="brand" href="#/" data-scroll="top" aria-label="AcadID home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" class="bm-bg"/><path d="M16 6l8 3v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V9z" class="bm-shield"/><path d="M12.5 15.5l2.5 2.5 4.5-5" class="bm-check"/></svg>
+          <span class="brand-word">Acad<b>ID</b></span>
+        </a>
+        <nav class="lp-nav" id="lpNav" aria-label="Main">
+          <a href="#/" data-scroll="features">Features</a>
+          <a href="#/" data-scroll="workflow">Workflow</a>
+          <a href="#/" data-scroll="benefits">Benefits</a>
+          <a href="#/" data-scroll="privacy">Privacy</a>
+          <a href="#/" data-scroll="faq">FAQ</a>
+          <a href="#/" data-scroll="contact">Contact</a>
+        </nav>
+        <div class="lp-actions">
+          <button type="button" class="icon-btn theme-toggle" data-action="toggle-theme" aria-label="Switch to dark mode" aria-pressed="false">
+            <span class="ico-moon" data-icon="moon"></span><span class="ico-sun" data-icon="sun"></span>
+          </button>
+          <a class="btn btn-primary btn-sm" href="#/login">Sign in</a>
+          <button type="button" class="icon-btn lp-burger" data-action="toggle-lpnav" aria-label="Open menu" aria-expanded="false" aria-controls="lpNav"><span data-icon="menu"></span></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="landing-main" tabindex="-1">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="aicte-badge">
+              <div class="aicte-logo-wrap">
+                <img class="js-logo" src="aicte-logo.jpg" width="132" height="106" alt="AICTE – All India Council for Technical Education logo">
+              </div>
+              <div>
+                <strong>All India Council for Technical Education</strong>
+                <span>Use case: student-data validation and APAAR record quality</span>
+              </div>
+            </div>
+            <p class="disclaimer-inline">AcadID is an independent prototype. The AICTE logo identifies the use case only; AcadID is not affiliated with, endorsed by, or connected to AICTE, APAAR, Aadhaar or DigiLocker.</p>
+
+            <p class="eyebrow">Academic Identity and Intelligent Verification Platform</p>
+            <h1>One Identity. Trusted Academics.</h1>
+            <p class="lead">AcadID helps institutions upload student records, validate them with transparent rules and fuzzy matching, flag possible duplicates and mismatches for human review, guide students through corrections, and share verified academic claims only with consent.</p>
+            <div class="hero-cta">
+              <a class="btn btn-primary btn-lg" href="#/login">Get Started</a>
+              <a class="btn btn-secondary btn-lg" href="#/login?demo=1">Explore Demo</a>
+            </div>
+            <ul class="hero-points">
+              <li><span data-icon="check"></span> Works with synthetic demo data</li>
+              <li><span data-icon="check"></span> Human review, never auto-merge</li>
+              <li><span data-icon="check"></span> Light and dark mode</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="Illustrative preview of the validation workflow">
+            <div class="preview-card">
+              <div class="preview-head"><span>Validation summary</span><em>Illustrative · synthetic data</em></div>
+              <div class="preview-stats">
+                <div><b data-stat="students">–</b><span>Demo records</span></div>
+                <div><b data-stat="issues">–</b><span>Flagged issues</span></div>
+                <div><b data-stat="institutions">–</b><span>Institutions</span></div>
+              </div>
+              <ul class="preview-list">
+                <li><span class="badge badge-danger">High</span> Same APAAR ID, different date of birth</li>
+                <li><span class="badge badge-warning">Medium</span> Name spelling variation (score 92%)</li>
+                <li><span class="badge badge-warning">Medium</span> APAAR ID missing</li>
+                <li><span class="badge badge-success">Valid</span> Record passed all checks</li>
+              </ul>
+              <p class="preview-note">A similarity score is a prompt for review, not proof of duplication or fraud.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROBLEM + SOLUTION -->
+      <section class="section" id="about">
+        <div class="container two-col">
+          <div>
+            <p class="eyebrow">The problem</p>
+            <h2>Student records drift out of sync</h2>
+            <p>Student-level academic information can contain missing identifiers, incomplete records, spelling variations, inconsistent details and potential duplicate enrolments. Manual checking and correction make it hard to find problems, track requests and keep records reliable.</p>
+            <ul class="tick-list">
+              <li>Missing or malformed APAAR identifiers</li>
+              <li>Name and date-of-birth inconsistencies</li>
+              <li>Possible duplicate or cross-institution enrolments</li>
+              <li>Slow, untracked correction and grievance handling</li>
+            </ul>
+          </div>
+          <div>
+            <p class="eyebrow">The proposed solution</p>
+            <h2>One platform from upload to verification</h2>
+            <p>AcadID is a centralised workspace that helps authorised institutions manage records linked to APAAR IDs, validate submitted data, identify inconsistencies, guide correction requests, track grievances and support privacy-conscious verification.</p>
+            <div class="flow-inline" aria-label="Core workflow">
+              <span>Upload</span><i>→</i><span>Validate</span><i>→</i><span>Detect</span><i>→</i><span>Correct</span><i>→</i><span>Review</span><i>→</i><span>Verify</span><i>→</i><span>Analyze</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="section alt" id="features">
+        <div class="container">
+          <p class="eyebrow">Features</p>
+          <h2>Everything needed to keep records trustworthy</h2>
+          <div class="grid grid-4">
+            <article class="card feature"><span class="f-ico" data-icon="upload"></span><h3>Bulk CSV import</h3><p>Preview, validate and import records with row-level errors, duplicate detection and a downloadable error report.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="alert"></span><h3>Smart mismatch detection</h3><p>Normalised and fuzzy matching with configurable thresholds flags issues with severity and recommended actions.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="clipboard"></span><h3>Pre-flight checker</h3><p>Compare document details with a record and get a personalised checklist in English and Tamil.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="ticket"></span><h3>Correction tracking</h3><p>Ticket IDs, status history, information requests, internal notes and overdue indicators.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="link"></span><h3>Consent-based proof links</h3><p>Time-limited, revocable tokens that disclose only the claims a student chooses to share.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="chart"></span><h3>Analytics dashboards</h3><p>Intake versus enrolment, data quality and exceptions, all computed from the records and consistent with exports.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="scroll"></span><h3>Audit trail</h3><p>Append-only log of imports, edits, approvals, exports and verification activity.</p></article>
+            <article class="card feature"><span class="f-ico" data-icon="download"></span><h3>Reports and exports</h3><p>CSV downloads and print-to-PDF views that respect your role and filters.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORKFLOW -->
+      <section class="section" id="workflow">
+        <div class="container">
+          <p class="eyebrow">Workflow</p>
+          <h2>Detect → Fix → Verify</h2>
+          <div class="grid grid-3">
+            <article class="card step"><span class="step-n">1</span><h3>Detect</h3><p>Upload data, run validation and see missing fields, invalid identifiers, possible duplicates and name or date-of-birth mismatches.</p></article>
+            <article class="card step"><span class="step-n">2</span><h3>Fix</h3><p>Students run a pre-flight check, raise a correction request and respond to questions. Administrators review, approve or reject with reasons.</p></article>
+            <article class="card step"><span class="step-n">3</span><h3>Verify</h3><p>With consent, a student generates a time-limited link or QR code that shows a verifier only the permitted claims.</p></article>
+          </div>
+
+          <h3 class="sub-h">Platform workflow</h3>
+          <ol class="pipeline" aria-label="Platform workflow illustration">
+            <li><b>Institution data</b><span>CSV files and forms</span></li>
+            <li><b>Validation engine</b><span>Rules and fuzzy matching</span></li>
+            <li><b>Human review queue</b><span>Reviewed · Dismissed · Needs correction</span></li>
+            <li><b>Correction tickets</b><span>Tracked with full history</span></li>
+            <li><b>Proof links</b><span>Consent, expiry, revocation</span></li>
+            <li><b>Analytics and audit</b><span>Reports that agree with the data</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- BENEFITS -->
+      <section class="section alt" id="benefits">
+        <div class="container">
+          <p class="eyebrow">Benefits</p>
+          <h2>Built for every participant</h2>
+          <div class="grid grid-3">
+            <article class="card"><h3>Students</h3><ul class="tick-list"><li>See record completeness and any flagged mismatches</li><li>Know which documents to gather before applying</li><li>Track a correction with a unique ticket ID</li><li>Share only what you choose, and revoke at any time</li></ul></article>
+            <article class="card"><h3>Institutions</h3><ul class="tick-list"><li>Find data problems immediately after upload</li><li>Review each flag with the reason and score</li><li>Work through corrections with deadlines and history</li><li>Export reports for internal quality review</li></ul></article>
+            <article class="card"><h3>Administrators</h3><ul class="tick-list"><li>Compare approved intake with enrolment</li><li>Spot institutions with data-quality exceptions</li><li>Rely on figures that match cards, charts and exports</li><li>Audit significant actions</li></ul></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section class="section" id="privacy">
+        <div class="container two-col">
+          <div>
+            <p class="eyebrow">Data privacy and security</p>
+            <h2>Designed around data minimisation</h2>
+            <ul class="tick-list">
+              <li>Role-based views: students see only their own record; institution administrators see only their institution</li>
+              <li>APAAR IDs are masked in lists and never placed in links or QR codes</li>
+              <li>Proof links use random tokens with expiry, revocation and access logs</li>
+              <li>Date of birth, marks and identity numbers are never shared by default</li>
+              <li>Fuzzy matches never change an official record automatically</li>
+              <li>Audit entries avoid passwords, tokens and unnecessary personal data</li>
+            </ul>
+          </div>
+          <div class="card note-card">
+            <h3>About this prototype</h3>
+            <p>This version runs entirely in your browser and stores synthetic demo data in local browser storage. It has no server, so role checks run in the page itself. A production deployment needs a hardened backend, a real database and authorised integrations.</p>
+            <p>No real student information or government identifiers are used. Email, SMS, OCR and official verification are not connected and are labelled as simulated or unavailable wherever they appear.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section alt" id="faq">
+        <div class="container narrow">
+          <p class="eyebrow">Help</p>
+          <h2>Frequently asked questions</h2>
+          <details class="faq"><summary>Is AcadID an official AICTE, APAAR or DigiLocker service?</summary><p>No. AcadID is an independent prototype. The AICTE logo marks the use case being addressed and does not imply endorsement or partnership.</p></details>
+          <details class="faq"><summary>Is the data real?</summary><p>No. All institutions, students and identifiers are fictional and generated for the demonstration.</p></details>
+          <details class="faq"><summary>Does a high similarity score mean a duplicate or fraud?</summary><p>No. A score highlights something worth checking. Authorised reviewers decide, and records are never changed or merged automatically.</p></details>
+          <details class="faq"><summary>What does a proof link reveal?</summary><p>Only the claims the student selected, such as institution, programme or enrolment status, until the link expires or is revoked. It never contains personal data or an APAAR ID.</p></details>
+          <details class="faq"><summary>Can I try every role?</summary><p>Yes. Open Sign in and use the clearly labelled demo accounts for student, institution administrator, AICTE administrator (demo role) and academic verifier.</p></details>
+          <details class="faq"><summary>Where is my data stored?</summary><p>In your browser's local storage on this device. Settings has a button to reset the demo data.</p></details>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="container two-col">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Send feedback on the prototype</h2>
+            <p>Messages are saved locally in this browser for demonstration. They are not transmitted anywhere.</p>
+          </div>
+          <form class="card form" data-form="contact" novalidate>
+            <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" rows="4" required></textarea></div>
+            <p class="form-error" role="alert" hidden></p>
+            <button class="btn btn-primary" type="submit">Save message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="lp-footer">
+      <div class="container footer-in">
+        <div>
+          <a class="brand" href="#/" data-scroll="top"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" class="bm-bg"/><path d="M16 6l8 3v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V9z" class="bm-shield"/><path d="M12.5 15.5l2.5 2.5 4.5-5" class="bm-check"/></svg><span class="brand-word">Acad<b>ID</b></span></a>
+          <p class="muted small">One Identity. Trusted Academics.</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#/" data-scroll="about">About</a>
+          <a href="#/" data-scroll="features">Features</a>
+          <a href="#/" data-scroll="privacy">Privacy</a>
+          <a href="#/" data-scroll="faq">Help</a>
+          <a href="#/" data-scroll="contact">Contact</a>
+          <a href="#/login">Sign in</a>
+        </nav>
+      </div>
+      <div class="container footer-legal">Independent prototype with synthetic data. Not affiliated with or endorsed by AICTE, APAAR, Aadhaar or DigiLocker.</div>
+    </footer>
+  </div>
+
+  <!-- ====================== APP / LOGIN / VERIFY VIEWS ====================== -->
+  <div id="view" hidden></div>
+
+  <!-- Dialogs -->
+  <dialog id="modal" class="modal" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <header class="modal-head"><h2 id="modalTitle"></h2><button type="button" class="icon-btn" data-action="close-modal" aria-label="Close dialog" data-icon="x"></button></header>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+  <dialog id="confirm" class="modal modal-sm" aria-labelledby="confirmTitle" aria-describedby="confirmMsg">
+    <div class="modal-card">
+      <h2 id="confirmTitle"></h2>
+      <p id="confirmMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" data-action="confirm-no">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirmYes" data-action="confirm-yes">Confirm</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+  <div id="printArea" aria-hidden="true"></div>
+
+  <noscript><p class="noscript">AcadID needs JavaScript. Please enable it in your browser.</p></noscript>
+</body>
+</html>
